@@ -13,16 +13,16 @@
   align-content: flex-start;
   border-top: 1px solid black;
   border-left: 1px solid black;
-  /* justify-content: space-evenly; */
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
 }
 
 #container > div {
   box-sizing: border-box;
-  background-color: lightblue;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
 }
 
-/* #container > div:hover {
+#container > div:hover {
   background-color: black;
-} */
+}
