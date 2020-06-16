@@ -1,11 +1,40 @@
 const container = document.querySelector('#container');
 const controls = document.querySelector('#controls');
+
 const start = controls.querySelector('#start');
 const reset = controls.querySelector('#reset');
 
+const black = controls.querySelector('#black');
+const random = controls.querySelector('#random');
+const gradient = controls.querySelector('#gradient');
+
 let squareSize = 0;
 let childDivs = container.querySelectorAll('div');
-console.log(childDivs);
+let penColor = '';
+
+black.addEventListener('click', () => {
+    penColor = 'black';
+    childDivs.forEach(childDiv => {
+        childDiv.style.background = 'white';
+        childDiv.style.opacity = '1';
+    });
+});
+
+random.addEventListener('click', () => {
+    penColor = 'random';
+    childDivs.forEach(childDiv => {
+        childDiv.style.background = 'white';
+        childDiv.style.opacity = '1';
+    });
+});
+
+gradient.addEventListener('click', () => {
+    penColor = 'gradient';
+    childDivs.forEach(childDiv => {
+        childDiv.style.background = 'white';
+        childDiv.style.opacity = '0';
+    });
+});
 
 function getRandomColor() {
     let letters = '0123456789ABCDEF';
@@ -17,7 +46,6 @@ function getRandomColor() {
 }
 
 function createEtchASketchField(squareSize) {
-    let penColor = prompt('Chose pen color (black, random or gradient):');
     let childDivWidth = 100 / squareSize;
     let color = '';
 
@@ -40,56 +68,43 @@ function createEtchASketchField(squareSize) {
         childDiv.style.height = childDivWidth + '%';
         childDiv.style.flexBasis = childDivWidth + '%';
     });
-
-    if (penColor === 'black' || penColor === '') {
-        childDivs.forEach(childDiv => {
-            childDiv.addEventListener('mouseover', function (e) {
+    childDivs.forEach(childDiv => {
+        childDiv.addEventListener('mouseover', function (e) {
+            if (penColor === 'black' || penColor === '') {
                 e.target.style.background = 'black';
-            });
-        });
-    } else if (penColor === 'random') {
-        childDivs.forEach(childDiv => {
-            childDiv.addEventListener('mouseover', function (e) {
+            } else if (penColor === 'random') {
                 color = getRandomColor();
                 e.target.style.background = color;
-            });
-        });
-    } else if (penColor === 'gradient') {
-        let currentOpacity = 0;
-        childDivs.forEach(childDiv => {
-            childDiv.addEventListener('mouseover', function (e) {
+            } else if (penColor === 'gradient') {
                 currentOpacity = Number(e.target.style.opacity);
-                console.log('current opacity' + currentOpacity);
                 if (currentOpacity < 1) {
                     currentOpacity += 0.1;
                 }
                 e.target.style.background = 'black';
                 e.target.style.opacity = currentOpacity;
-            });
+            }
         });
-    };
+    });
 };
 
 start.addEventListener('click', () => {
     if (childDivs.length != 0) {
-        alert('Press Reset to reset field.');
+        alert('Press Reset to reset the field resolution.');
         return;
     }
-    squareSize = prompt('Enter square size (up to 64):');
+    squareSize = prompt('Enter resolution (number of squares per side of the field):');
     createEtchASketchField(squareSize);
-    console.log(childDivs);
+
 });
 
 reset.addEventListener('click', () => {
     if (childDivs.length === 0) {
-        alert('There is nothing to reset. Press Start');
+        alert('There is nothing to reset.');
         return;
-    }
-    container.style.borderTop = '';
-    container.style.borderLeft = '';
+    };
     childDivs.forEach(childDiv => {
         childDiv.remove();
     });
-    squareSize = prompt('Enter square size (up to 64):');
+    squareSize = prompt('Enter resolution (number of squares per side of the field):');
     createEtchASketchField(squareSize);
 });

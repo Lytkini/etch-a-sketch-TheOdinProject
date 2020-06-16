@@ -1,6 +1,7 @@
 #container {
   position: absolute;
   margin: auto;
+  border: 1px solid black;
   top: 0;
   right: 0;
   bottom: 0;
@@ -15,10 +16,13 @@
 
 #container > div {
   box-sizing: border-box;
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
 }
 
 #container > div:hover {
   background-color: black;
+}
+
+h3 {
+  position: relative;
+  left: 46%;
 }
