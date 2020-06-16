@@ -1,6 +1,12 @@
 #container {
-  width: 960px;
-  height: 960px;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 500px;
+  height: 500px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -15,11 +21,8 @@
   background-color: lightblue;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
-  width: 6.25%;
-  height: 6.25%;
-  flex-basis: 6.25%;
 }
 
-#container > div:hover {
+/* #container > div:hover {
   background-color: black;
-}
+} */
